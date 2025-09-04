@@ -28,6 +28,17 @@ The project is structured into three main phases:
     * **Hardware:** A stepper motor with a planetary gear was chosen, requiring a calculated torque of M = 35 Ncm. Custom 3D-printed parts were used to connect the motor to the spool.
     * **Software:** The **Marlin firmware**, commonly used in 3D printing, was adapted and uploaded to an Arduino board. This setup controls the stepper motor, cooling fan, heating cartridges, and thermistor. The **Pronterface** user interface was used for direct command and control.
 
+## 📁 Repository Contents
+
+| File | Description |
+|------|-------------|
+| `concept.png` | System concept diagram for automated fiber encapsulation |
+| `Configuration.h` | Main Marlin configuration (printer setup, steps, thermistors, dimensions) |
+| `Configuration_adv.h` | Advanced Marlin settings (fiber feed tuning, stepper drivers, advanced features) |
+| `Version.h` | Firmware version info and metadata |
+| `Marlin.confi.ino/` | Adapted Marlin firmware for fiber encapsulation automation |
+
+
 ## ✅ Project Results
 
 ---
