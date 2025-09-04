@@ -14,6 +14,8 @@ The primary objective is to automate the process of coating carbon fiber roving 
 
 ---
 
+![Project Concept Diagram](https://github.com/Pyrius2k/Automation/blob/main/concept.png)
+
 The project is structured into three main phases:
 
 * **1. Technical Foundations:** An analysis of the FLM printing process, including the structure of the extruder and hotend. This section also explores the **Markforged concept**, a key inspiration for embedding encapsulated fibers to create reinforced components.
