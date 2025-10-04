@@ -2,56 +2,108 @@
 
 ---
 
-This repository contains the documentation and core files for an engineering project focused on the automated encapsulation of continuous fibers for integration into a Fused Layer Modeling (FLM) 3D printer. The goal of this project is to create mechanically stronger and lighter components by embedding reinforced, continuous carbon fibers within a 3D-printed part.
+This repository contains the documentation, design files, and core firmware for an engineering project focused on the **automated encapsulation of continuous carbon fibers**. This system serves as a crucial **pre-processing step** for the production of high-strength composite components using Fused Layer Modeling (FLM) 3D printing.
 
-## ✨ Project Goal
-
----
-
-The primary objective is to automate the process of coating carbon fiber roving with a plastic granulate, which can then be fed into an FLM 3D printer. This work systematically follows an engineering design process, from foundational research to practical implementation and testing.
-
-## ⚙️ Core Concepts & Approach
+## ✨ Project Goal & Context
 
 ---
 
-![Project Concept Diagram](https://github.com/Pyrius2k/Automation/blob/main/concept.png)
+The primary objective was to **design, implement, and validate** an automated machine capable of coating carbon fiber roving with a thermoplastic granulate. This process ensures the fibers are uniformly prepared for subsequent integration into a specialized FLM extruder, thereby enabling the production of mechanically superior, fiber-reinforced 3D prints.
 
-The project is structured into three main phases:
+## ⚙️ Core Concepts & Methodology
 
-* **1. Technical Foundations:** An analysis of the FLM printing process, including the structure of the extruder and hotend. This section also explores the **Markforged concept**, a key inspiration for embedding encapsulated fibers to create reinforced components.
+---
 
-* **2. System Requirements & Concept Evaluation:**
-    * **Requirements:** Critical system requirements were defined, including reliable heating of the granulate, kink-free deflection of the fibers, and a consistent feed mechanism.
-    * **Concept Development:** A functional structure analysis was performed, leading to a morphological box for potential solutions. Key decisions included selecting a **stepper motor** for its superior control in fiber feeding and opting for a **direct drive** or belt drive system for simplicity and cost-effectiveness.
+<p align="center">
+  <img src="concept.png" alt="Project Concept Diagram" width="650"/>
+  <br><em>System concept diagram illustrating the automated fiber encapsulation process.</em>
+</p>
 
-* **3. Implementation & Realization:**
-    * **Hardware:** A stepper motor with a planetary gear was chosen, requiring a calculated torque of M = 35 Ncm. Custom 3D-printed parts were used to connect the motor to the spool.
-    * **Software:** The **Marlin firmware**, commonly used in 3D printing, was adapted and uploaded to an Arduino board. This setup controls the stepper motor, cooling fan, heating cartridges, and thermistor. The **Pronterface** user interface was used for direct command and control.
+The project followed a robust engineering design process:
+
+* **1. Technical Foundations:** Comprehensive analysis of the FLM process and the **Markforged concept**—a key inspiration for embedding reinforced, encapsulated fibers to enhance component strength.
+
+* **2. System Design & Requirements:**
+    * **Requirements:** Critical system parameters were defined, including the necessity for reliable heating of the granulate (up to $185\ \text{°C}$), kink-free fiber deflection, and a consistent feed mechanism.
+    * **Concept Selection:** A functional analysis led to the selection of a **stepper motor with planetary gear** for superior, precise fiber feeding control.
+
+* **3. Implementation & Realization (Hardware/Software):**
+    * **Hardware:** Custom 3D-printed parts were designed for the spool-to-motor connection. A stepper motor with a calculated torque of $M = 35\ \text{Ncm}$ was selected and integrated.
+    * **Software/Control:** **Marlin firmware** was adapted and uploaded to an Arduino board to control the stepper motor, heating cartridges, thermistor, and cooling fan.
+
+### 🔌 Component Realization & Connection
+
+The physical system was realized by integrating the heating block, motor, and control electronics.
+
+<p align="center">
+  <img src="ippreal.jpg" alt="Realized Encapsulation System" width="550"/>
+  <br><em>The complete, realized automated fiber encapsulation system.</em>
+</p>
+<p align="center">
+  <img src="connection.png" alt="Roll Connection CAD" width="550"/>
+  <br><em>CAD view detailing the precise connection of the fiber spool/roll via a hollow shaft, bracket, screw connection, and ball bearing for smooth, kink-free feeding.</em>
+</p>
+
+---
+
+## 💻 Software & Control Interface
+
+The system is controlled via adapted Marlin firmware, allowing for precise regulation of temperature and feed rate.
+
+### PID Temperature Control
+
+The firmware successfully managed the heating block to melt the granulate, reaching the required temperature with minimal overshoot.
+
+<p align="center">
+  <img src="temperaturediagram.png" alt="Temperature PID Graph" width="550"/>
+  <br><em>Graph showing the system’s temperature curve as the heating block reaches the required 185 °C melting temperature.</em>
+</p>
+
+### Pronterface User Interface
+
+Direct control and testing of the system parameters were performed using the **Pronterface** user interface.
+
+<p align="center">
+  <img src="pronterfacesurface.png" alt="Pronterface UI" width="450"/>
+  <br><em>Screenshot of the Pronterface interface used for testing motor feed rates and managing heating commands.</em>
+</p>
+
+---
+
+## ✅ Project Results & Validation
+
+The project successfully delivered a validated system for fiber pre-processing.
+
+<p align="center">
+  <img src="coatedfibres.png" alt="Coated Fiber Result" width="450"/>
+  <br><em>Qualitative result: Magnified view of the produced carbon fibers, demonstrating uniform and consistent polymer encapsulation.</em>
+</p>
+
+**Key Findings:**
+* **Process Validation:** The system reliably reached $185\ \text{°C}$ and effectively pulled the carbon fibers through the granulate melt pool.
+* **Quality Output:** The final die successfully produced a **high-quality, evenly coated fiber**, suitable for reinforcing FLM-printed parts.
+* **Thermal Stability:** A stable connection between the thermistor and the heating block proved crucial for accurate temperature readings and PID stability.
+
+---
 
 ## 📁 Repository Contents
 
 | File | Description |
-|------|-------------|
-| `concept.png` | System concept diagram for automated fiber encapsulation |
+|:------|:-------------|
+| `Marlin.confi.ino/` | Adapted Marlin firmware for fiber encapsulation automation |
 | `Configuration.h` | Main Marlin configuration (printer setup, steps, thermistors, dimensions) |
 | `Configuration_adv.h` | Advanced Marlin settings (fiber feed tuning, stepper drivers, advanced features) |
 | `Version.h` | Firmware version info and metadata |
-| `Marlin.confi.ino/` | Adapted Marlin firmware for fiber encapsulation automation |
+| `concept.png` | System concept diagram for automated fiber encapsulation |
+| `ippreal.jpg` | **Photo of the realized automated encapsulation system** |
+| `connection.png` | **CAD drawing of the fiber roll connection mechanism** |
+| `coatedfibres.png` | **Photo showing the result of the uniformly coated carbon fibers** |
+| `pronterfacesurface.png` | **Screenshot of the Pronterface user interface** |
+| `temperaturediagram.png` | **Graph of the heating block's temperature regulation** |
 
-
-## ✅ Project Results
-
----
-
-The system was successfully tested, demonstrating that the heating block can reliably reach 185 °C to melt the granulate. The stepper motor effectively pulls the carbon fibers through the melt pool, and the final die shapes the encapsulated fiber. The result is a high-quality, evenly coated fiber suitable for reinforcing FLM-printed parts.
-
-**Key Findings:**
-* A stable connection between the thermistor and the heating block is crucial for accurate temperature readings.
-* The system produced consistently good quality encapsulated fibers.
-* Future work could explore a larger nozzle diameter depending on the desired fiber quality.
 
 ## 🚀 Next Steps
 
 ---
 
-The successful production of encapsulated fibers paves the way for their use in a future bachelor's thesis, which will focus on their application to create stronger FLM-printed components.
+The successful production of high-quality encapsulated fibers paves the way for their subsequent use in a specialized **parallel dual-extruder** (the subject of the related bachelor's thesis) focused on creating stronger FLM-printed components.
